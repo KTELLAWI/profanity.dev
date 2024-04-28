@@ -5,8 +5,8 @@ import { Transform } from 'stream'
 import "dotenv/config"
 
 const index = new Index({
-  url: process.env.VECTOR_URL,
-  token: process.env.VECTOR_TOKEN,
+  url:process.env.VECTOR_URL,
+  token:process.env.VECTOR_TOKEN,
 })
 
 interface Row {
