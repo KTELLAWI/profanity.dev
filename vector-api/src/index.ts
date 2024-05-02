@@ -23,7 +23,12 @@ type Environment = {
 const app = new Hono()
 
 app.use(cors())
+app.get('/',async (c) => {
+  
+    return c.json({ sucess: 'the server is working well.' }, { status: 200 })
+  }
 
+);
 app.post('/', async (c) => {
   if (c.req.header('Content-Type') !== 'application/json') {
     return c.json({ error: 'JSON body expected.' }, { status: 406 })
@@ -79,7 +84,7 @@ app.post('/', async (c) => {
 
         if (vector && vector.score > 0.95) {
           flaggedFor.add({
-            text: vector.metadata!.text as string,
+            text:  ` حاول تجنب هذه الكلمة  ${wordChunk}`  + " فهي قريبة في المعني من  "  + vector.metadata!.text  as string,//vector.metadata!.text as string,
             score: vector.score,
           })
         }
@@ -95,7 +100,7 @@ app.post('/', async (c) => {
 
         if (vector && vector.score > PROFANITY_THRESHOLD) {
           flaggedFor.add({
-            text: vector.metadata!.text as string,
+            text:"!!!!حاول تجنب هذه الكلمات" +" " + semanticChunk as string,//vector.metadata!.text as string,
             score: vector.score,
           })
         }
